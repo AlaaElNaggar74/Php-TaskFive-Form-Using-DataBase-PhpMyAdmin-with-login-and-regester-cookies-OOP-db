@@ -1,0 +1,88 @@
+
+Alaa ,elnaggar,AlaaElNaggar72@gmail.com,123
+Said,Mohamed,said@gmail.com,5687
+Hoda,Karem,karem@gmail.com,hhhhhh
+Yousef,Mido,mido@gmail.com,9214
+Gamal,Girgis,girges@gmail.com,8ujnhg
+
+
+
+
+
+
+
+
+
+
+
+<?php
+                        echo $_GET["id"];
+
+
+$data = file("data.txt");
+$fopen = fopen('data.txt', 'w+');
+
+foreach ($data as $keyPar => $eachRow) {
+    $singeRow = explode(",", $eachRow);    
+        if (isset($_GET["id"]) != $keyPar) {
+        file_put_contents("data.txt",$eachRow,FILE_APPEND);
+    }
+}
+
+// header('Location: display.php');
+
+fclose($fopen);
+
+
+
+?>
+
+
+
+
+<?php
+
+$formData = $_GET;
+
+$dataStr = implode(",", $formData);
+
+if (filesize("data.txt")  == 0) {
+    file_put_contents("data.txt",$dataStr,FILE_APPEND);
+
+}else{
+
+    file_put_contents("data.txt","\n".$dataStr,FILE_APPEND);
+
+} ;
+// echo "$dataStr";
+
+
+// $file = fopen("data.txt", $dataStr);
+//     fgets($file,);
+// fclose($file);
+?>
+
+
+
+
+
+
+<?php
+$data = file("data.txt");
+
+foreach ($data as $keyPar => $eachRow) {
+
+    $singeRow = explode(",", $eachRow);
+    if ($_GET["id"] == $keyPar) {
+
+        foreach ($singeRow as $keyChild => $value) {
+            echo $keyChild == 0 ?  "<h3>First Name Is : <span class='text-danger'> $value </span></h3>" : "";
+            echo $keyChild == 1 ?  "<h3>Last Name Is : <span class='text-danger'> $value </span></h3>" : "";
+            echo $keyChild == 2 ? "<h3>Email Address Is : <span class='text-danger'> $value </span></h3>" : "";
+        }
+    }
+    echo "</tr>";
+}
+
+
+?>

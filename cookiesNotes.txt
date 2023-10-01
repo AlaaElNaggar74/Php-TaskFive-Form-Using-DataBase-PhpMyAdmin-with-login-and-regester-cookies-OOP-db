@@ -1,0 +1,3 @@
+if (!isset($_COOKIE["email"])) {
+    header("location:login.php");
+ }
